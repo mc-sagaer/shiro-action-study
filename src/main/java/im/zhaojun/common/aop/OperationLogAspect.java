@@ -25,7 +25,7 @@ import java.lang.reflect.Method;
  */
 @Aspect
 @Component
-@ConditionalOnProperty(value = "shiro-action.log.operation", havingValue = "false")
+@ConditionalOnProperty(value = "shiro-action.log.operation", havingValue = "true")
 public class OperationLogAspect {
 
     @Resource
