@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>公共页面</title>
+</head>
+
+<body>
+    <th:block th:fragment="menu(menu)">
+        <dl class="layui-nav-child">
+            <dd th:each="child:${menu.children}">
+                <a data-th-lay-id="${child.url}" data-th-lay-url="${child.url}">
+                    <cite th:text="${child.menuName}"></cite>
+                </a>
+                <th:block th:unless="${#lists.isEmpty(child.children)}" th:include="this::menu(${child})" />
+            </dd>
+        </dl>
+    </th:block>
+</body>
+</html>

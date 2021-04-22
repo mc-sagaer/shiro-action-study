@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8">
+    <title>在线用户管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/lib/layui/css/layui.css}">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/animate.min.css}">
+    <link rel="stylesheet" th:href="@{/iconfont/iconfont.css}">
+</head>
+
+<body>
+
+    <div class="page-loading">
+        <div class="rubik-loader"></div>
+    </div>
+    <div class="z-body animated fadeIn">
+        <table class="layui-hide" id="user-table"></table>
+    </div>
+
+    <script type="text/html" id="column-toolbar">
+        <shiro:hasPermission name="online:kickout">
+            {{#  if('<shiro:principal property="username"/>' != d.username) { }}
+                <a lay-event="kickout">
+                    <i class="zadmin-icon zadmin-icon-icon_qiangzhixiaxian zadmin-oper-area zadmin-red" title="强制下线"></i>
+                </a>
+            {{#  } }}
+        </shiro:hasPermission>
+
+        <shiro:lacksPermission  name="online:kickout">
+            <i class="zadmin-icon zadmin-icon-wuquanxian zadmin-oper-area zadmin-red"></i>无权限
+        </shiro:lacksPermission>
+    </script>
+
+    <script th:src="@{/lib/jquery/jquery.min.js}"></script>
+    <script th:src="@{/lib/layui/layui.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+
+    <script>
+        layui.use(['table', 'element', 'laydate'], function () {
+            var table = layui.table;
+            var $ = layui.$;
+
+            table.render({
+                elem: '#user-table'
+                , url: '/online/list'
+                , page: true
+                , cols: [
+                    [
+                        {type: 'numbers', title: '序号', width: "5%"}
+                        , {field: 'username', title: '用户名', width: "13%", templet: function (d) {
+                                var username = d.username;
+                                if (d.id === '[[${#session.id}]]') {
+                                    username += "<i class=\"layui-icon layui-icon-ok-circle zadmin-blue\" title='当前登录'></i>";
+                                }
+                                return username;
+                            }
+                        }
+                        , {field: 'id', title: 'SESSION_ID', width: "25%"}
+                        , {field: 'startTimestamp', title: '登录时间', width: "15%"}
+                        , {field: 'lastAccessTime', title: '最后访问时间', width: "15%"}
+                        , {field: 'ip', title: 'IP', width: "12%"}
+                        , {field: 'status', title: '状态', width: "5%"}
+                        , {title: '操作', align: 'center', toolbar: '#column-toolbar'}
+                    ]
+                ]
+            });
+
+            // 行点击事件
+            table.on('tool', function (obj) {
+                var data = obj.data;
+                var event = obj.event;
+                if (event === 'kickout') {
+                    layer.confirm("确定将该用户踢出?", {icon: 3, title: "提示"}, function (index) {
+                        $.post('/online/kickout', {"sessionId": data.id}, function (data) {
+                            handlerResult(data, kickoutDone);
+                        });
+                    });
+                }
+            });
+
+            function kickoutDone(data) {
+                parent.layer.msg("该用户已被强制下线!", {icon: 6});
+                window.location.reload();
+            }
+        });
+    </script>
+</body>
+
+</html>
