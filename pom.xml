@@ -8,9 +8,9 @@
     <version>0.6</version>
     <packaging>jar</packaging>
 
-    <name>Shiro-Action</name>
+    <name>My-Project</name>
     <description>一个基础 Shiro 的权限管理系统</description>
-    <url>https://github.com/zhaojun1998/Shiro-Action</url>
+    <url>https://github.com/mc-sagaer/shiro-action-study.git</url>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

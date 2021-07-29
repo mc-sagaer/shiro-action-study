@@ -11,7 +11,7 @@
 
 预览地址: [http://shiro.jun6.net/](http://shiro.jun6.net/)
 
-文档地址: [http://docs.zhaojun.im/shiro/](http://docs.zhaojun.im/shiro/)
+文档地址: [http://docs.zhaojun.com/shiro/](http://docs.zhaojun.im/shiro/)
 
 默认管理员账号: `admin`, 密码: `123456`.
 

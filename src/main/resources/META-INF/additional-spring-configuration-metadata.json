@@ -1,53 +1,53 @@
 {
   "properties": [
     {
-      "name": "shiro-action.log.operation",
+      "name": "my-project.log.operation",
       "type": "java.lang.Boolean",
       "defaultValue": true,
       "description": "是否记录操作日志."
     },
     {
-      "name": "shiro-action.log.login",
+      "name": "my-project.log.login",
       "type": "java.lang.Boolean",
       "defaultValue": true,
       "description": "是否记录登录日志."
     },
     {
-      "name": "shiro-action.super-admin-username",
+      "name": "my-project.super-admin-username",
       "type": "java.lang.String",
       "defaultValue": "user",
       "description": "超级管理员用户名."
     },
     {
-      "name": "shiro-action.retry-count",
+      "name": "my-project.retry-count",
       "type": "java.lang.Integer",
       "defaultValue": 5,
       "description": "登录失败重试次数."
     },{
-      "name": "shiro-action.retry-timeout",
+      "name": "my-project.retry-timeout",
       "type": "java.lang.Integer",
       "defaultValue": 300,
       "description": "超出登录失败重试次数后, 禁用账号的时间. 单位为秒"
     },
     {
-      "name": "shiro-action.login-verify",
+      "name": "my-project.login-verify",
       "type": "java.lang.Boolean",
       "defaultValue": false,
       "description": "是否开启登录验证码."
     },
     {
-      "name": "shiro-action.oauth2-provider",
+      "name": "my-project.oauth2-provider",
       "type": "java.util.Map",
       "description": "Github OAuth2 Client Id."
     },
     {
-      "name": "shiro-action.session-timeout",
+      "name": "my-project.session-timeout",
       "type": "java.lang.Integer",
       "defaultValue": 1800,
       "description": "用户登录 Session 过期时间 (秒)."
     },
     {
-      "name": "shiro-action.perms-cache-timeout",
+      "name": "my-project.perms-cache-timeout",
       "type": "java.lang.Integer",
       "defaultValue": 3600,
       "description": "用户权限缓存过期时间 (秒)."
